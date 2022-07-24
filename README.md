@@ -8,5 +8,8 @@
 + onnx
 + onnxruntime
 + onnx-simplifier
- ## 模型部署流程
-model+pth ---> onnx --->
+## 模型部署流程
+model+pth ---> onnx
+### 使用ncnn框架部署
++ 建议按照该文章安装ncnn框架 https://zhuanlan.zhihu.com/p/506889381
++ 使用该网站进行线上转换 https://convertmodel.com/
