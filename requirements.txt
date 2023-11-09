@@ -1,0 +1,7 @@
+pytorch
+opencv
+torchvision
+onnx
+onnxruntime
+onnx-simplifier
+pillow
