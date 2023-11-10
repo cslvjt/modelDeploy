@@ -58,8 +58,14 @@ def to_black(img):
     return output
 
 if __name__ == "__main__":
+    title = "a super resolution demo using SRCNN"
+    description = r"""
+    just for test
+    """
     interface = gr.Interface(inference,
                             inputs=[gr.Image(type="filepath", label="Input"),
                             gr.Number(label="Upscaling factor (up to 4)")], # 上传一张图像，gradio会将其转化为numpy array格式 shape[h,w,c]
-                            outputs=[gr.Image(type="numpy", label="Output")])
+                            outputs=[gr.Image(type="numpy", label="Output")],
+                            title=title,
+                            description=description)
     interface.launch()
