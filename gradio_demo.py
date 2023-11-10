@@ -64,7 +64,7 @@ if __name__ == "__main__":
     """
     interface = gr.Interface(inference,
                             inputs=[gr.Image(type="filepath", label="Input"),
-                            gr.Number(label="Upscaling factor (up to 4)")], # 上传一张图像，gradio会将其转化为numpy array格式 shape[h,w,c]
+                            gr.Number(value=2,label="Upscaling factor (up to 4)")], # 上传一张图像，gradio会将其转化为numpy array格式 shape[h,w,c]
                             outputs=[gr.Image(type="numpy", label="Output")],
                             title=title,
                             description=description)

@@ -26,3 +26,4 @@ pip install -r requirements.txt
 
 # 参考
 + SRCNN代码和权重：https://zhuanlan.zhihu.com/p/477743341
++ gradio: https://www.gradio.app/guides/quickstart
