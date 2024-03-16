@@ -1,5 +1,6 @@
 import torch
 from model.srcnn_arch import load_net
+from model.LWDNet_arch import load_LWDNet
 import argparse
 
 def model2onnx(args):
@@ -8,6 +9,8 @@ def model2onnx(args):
 
     if args.model_name == "SRCNN":
         net = load_net(args.weight_path)
+    elif args.model_name == "LWDNet":
+        net = load_LWDNet(args.weight_path)
     else:
         raise ValueError(f"{args.model_name} not find")
     with torch.no_grad():

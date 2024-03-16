@@ -1,4 +1,6 @@
 from model.srcnn_arch import load_net
+from model.LWDNet_arch import load_LWDNet
+import torch
 import utils
 import numpy as np
 import onnxruntime
@@ -8,17 +10,24 @@ import argparse
 def load_model(model_name, weight_path):
     if model_name == "SRCNN":
         net = load_net(weight_path)
+    elif args.model_name == "LWDNet":
+        net = load_LWDNet(args.weight_path)
     else:
         raise ValueError(f"{model_name} not find")
     return net
     
 def test_model(model, img_path, output_path):
-    img = utils.read_img(img_path)
-    out = model(img.unsqueeze(0))
+    model.eval()
+    model.cuda()
+    img = utils.read_img(img_path).cuda()
+    with torch.no_grad():
+        out = model(img.unsqueeze(0))
     utils.tensor2img(out[0], output_path)
 
+# TODO: LWDNet的输出结果全黑
 def test_onnx(onnx_model, img_path, output_path):
-    input_img = cv2.imread(img_path).astype(np.float32)
+    input_img = cv2.imread(img_path).astype(np.float32) / 255.0
+    input_img = cv2.cvtColor(input_img,cv2.COLOR_BGR2RGB).astype("float32")
     input_img = np.transpose(input_img, [2, 0, 1]) 
     input_img = np.expand_dims(input_img, 0)
     
@@ -27,8 +36,8 @@ def test_onnx(onnx_model, img_path, output_path):
     ort_output = ort_session.run(['output'], ort_inputs)[0] 
     
     ort_output = np.squeeze(ort_output, 0) 
-    ort_output = np.clip(ort_output, 0, 255) 
-    ort_output = np.transpose(ort_output, [1, 2, 0]).astype(np.uint8) 
+    ort_output = np.clip(ort_output, 0, 1) 
+    ort_output = np.transpose(ort_output, [1, 2, 0]).astype(np.uint8)
     cv2.imwrite(output_path, ort_output)
 
 if __name__ == "__main__":
@@ -41,5 +50,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
     model = load_model(args.model_name, args.weight_path)
-    test_model(model, args.img_path, args.output_path)
+    # test_model(model, args.img_path, args.output_path)
     test_onnx(args.onnx_path, args.img_path, args.output_path)
