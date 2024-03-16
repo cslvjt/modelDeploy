@@ -1,5 +1,5 @@
 import torch
-from SRCNN.srcnn_arch import load_net
+from model.srcnn_arch import load_net
 import argparse
 
 def model2onnx(args):
@@ -19,6 +19,7 @@ def model2onnx(args):
             input_names=['input'], 
             output_names=['output']
         )
+    print(args.onnx_path)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
