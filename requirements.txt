@@ -1,7 +1,8 @@
 pytorch
-opencv
+opencv-python
 torchvision
 onnx
 onnxruntime
 onnx-simplifier
 pillow
+gradio

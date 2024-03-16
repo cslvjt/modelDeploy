@@ -1,3 +1,0 @@
-/mnt/t/github/model_deploy/ncnn/CMakeFiles/rebuild_cache.dir
-/mnt/t/github/model_deploy/ncnn/CMakeFiles/main.dir
-/mnt/t/github/model_deploy/ncnn/CMakeFiles/edit_cache.dir
