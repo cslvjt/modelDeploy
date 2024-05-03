@@ -1,2 +1,4 @@
 ncnn\CMakeFiles
 ncnn\CMakeCache.txt
+__pycache__\*
+model\__pycache__\*
